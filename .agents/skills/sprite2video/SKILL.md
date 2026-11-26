@@ -1,12 +1,12 @@
 ---
-name: sprite-code-video
+name: sprite2video
 description: "从一篇文章（文案）或一个 GitHub 仓库，制作带角色贴图库、丰富代码动效和帧级音效的 Remotion 视频。原生支持两大标杆风格：① 大肥鱼风格（dafeiyu，9:16 竖屏强动效信息图科普，顶部进度条 + NO.xx 标题 + 变色动态背景 + 双语字幕 + 底部常驻 Q 版贴图）；② 卡普迪姆风格（capdim，16:9 横屏复古方格纸叙事/吐槽，底部章节导航条 + 截图/图表 + 右侧情绪立绘）。当用户丢来一篇文章、Markdown、或 GitHub 链接要求做成带角色贴图的代码视频时使用。"
-display_name: "贴图驱动代码动画视频导演"
-version: 1.0.0
-tags: [remotion, video, storyboard, github, explainer, dafeiyu, capdim, sprite, sfx]
+display_name: "sprite2video · 贴图驱动代码动画视频导演"
+version: 1.1.0
+tags: [sprite2video, remotion, video, storyboard, github, explainer, dafeiyu, capdim, sprite, sfx]
 ---
 
-# Sprite Code Video（贴图驱动代码动画视频 Skill）
+# sprite2video（贴图驱动代码动画视频 Skill）
 
 本 Skill 解决“纯代码动画太单调”的问题：**把文章或 GitHub 仓库拆解为高密度可视化分镜，再用 QQ 秀式情绪路由给每一幕配上透明角色贴图、微动效与帧级音效**。
 
@@ -26,9 +26,9 @@ tags: [remotion, video, storyboard, github, explainer, dafeiyu, capdim, sprite, 
 | **字幕** | 底部居中卡拉 OK 扫金中文 + 英文副字幕 | 底部居中半透明黑底白字单行清晰中文字幕 |
 
 > **极简提示词速记**（用户只需给方向词即可自动套用整套默认角色/音色/动效/封面，如需覆盖再补充 `角色=xxx`、`配音=xxx`）：
-> - 竖屏默认：`用 sprite-code-video 竖屏介绍 https://github.com/owner/repo`
-> - 横屏默认：`用 sprite-code-video 横屏把这篇文章做成视频：<文件/文章>`
-> - 自由混搭：`用 sprite-code-video 竖屏介绍 <链接>，角色用 evil-neuro-chibi，配音用 evil-neuro-cn`
+> - 竖屏默认：`用 sprite2video 竖屏介绍 https://github.com/owner/repo`
+> - 横屏默认：`用 sprite2video 横屏把这篇文章做成视频：<文件/文章>`
+> - 自由混搭：`用 sprite2video 竖屏介绍 <链接>，角色用 evil-neuro-chibi，配音用 evil-neuro-cn`
 
 ---
 
@@ -59,7 +59,7 @@ python .agents/skills/video-sprite-pack/scripts/match_script.py `
 
 ### 第 4 步：准备配音与 SFX（可选真实 TTS，或按字数预估时长）
 - 若配置了 `LATENT_AUDIO_KEY`，调用 `.agents/skills/latent-media/scripts/latent.py tts` 逐幕生成 `.mp3` 并用 `duration_ms` 精确反推每幕 `durationInFrames = Math.ceil(duration_ms / 1000 * 30) + 8`。
-- 确保 `public/sfx/` 下 7 个基础音效已就绪（缺失则跑 `python .agents/skills/sprite-code-video/scripts/generate_sfx.py -o public/sfx`）。
+- 确保 `public/sfx/` 下 10 个基础音效已就绪（缺失则跑 `python .agents/skills/sprite2video/scripts/generate_sfx.py -o public/sfx`）。
 
 ### 第 5 步：用内置组件组装 Remotion 视频
 在 `src/videos/<TopicName>.tsx` 新建组合，并在 `src/Root.tsx` 注册 `<Composition>`。**优先复用内置组件，严禁手写简陋纯文字 PPT**：

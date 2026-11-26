@@ -1,4 +1,4 @@
-# Project Rules: sprite-video-studio
+# Project Rules: sprite2video
 
 这是一个**“角色贴图库 + 代码动画 + 帧级音效”驱动的视频创作工作台**，核心目标是从一篇文章（文案）或一个 GitHub 仓库，自动生成生动形象的解说视频（避免纯代码动画的单调感）。
 
@@ -15,7 +15,7 @@
 
 1. **`latent-media`**：调用 `latent.moe` 文生图与 `audio.latent.moe` 语音合成（支持 `[叹气]` `[轻笑]` 等气声事件）。
 2. **`video-sprite-pack`**：通过纯文生图（`2x2 网格` 或 `锁 DNA + 锁 Seed 单张`）批量生产角色贴图库，自动切片、精准抠图去白边、统一尺寸锚点对齐、生成验收拼图 `contact-sheet.png` 与 QQ 秀式台词路由清单 `manifest.json`。
-3. **`sprite-code-video`**：从一篇文章或 GitHub 仓库出发，拆解分镜脚本 → 用 `match_script.py` 自动为每句台词匹配角色表情/微动效/音效 → 合成配音与 SFX → 生成 Remotion 代码 → 抽帧质检并渲染 MP4。
+3. **`sprite2video`**：从一篇文章或 GitHub 仓库出发，拆解分镜脚本 → 用 `match_script.py` 自动为每句台词匹配角色表情/微动效/音效 → 合成配音与 SFX → 生成 Remotion 代码 → 抽帧质检并渲染 MP4。
 
 ## 硬性约定
 

@@ -51,7 +51,7 @@ npx skills add guohuiyuan/sprite2video
 
 | Skill | 路径 | 职责 |
 |---|---|---|
-| **`sprite-code-video`** | `.agents/skills/sprite-code-video/` | 文章 / GitHub Repo → 分镜拆解 → 情绪路由 → 配音/SFX/BGM → Remotion 渲染 → B 站标题/封面/简介三件套 |
+| **`sprite2video`** | `.agents/skills/sprite2video/` | 文章 / GitHub Repo → 分镜拆解 → 情绪路由 → 配音/SFX/BGM → Remotion 渲染 → 全平台标题/三规格封面/简介 |
 | **`video-sprite-pack`** | `.agents/skills/video-sprite-pack/` | 角色 DNA 反推 → 2×2 网格/锁 Seed 批量出图 → 自动切片抠图对齐 → Trace & 一致性验收拼图 → `manifest.json` 路由器 |
 | **`latent-media`** | `.agents/skills/latent-media/` | 零依赖调用 `latent.moe` 文生图与 `audio.latent.moe` 多音色语音合成（来自 [guohuiyuan/latent-media](https://github.com/guohuiyuan/latent-media)） |
 
@@ -63,7 +63,7 @@ npx skills add guohuiyuan/sprite2video
 sprite2video/
 ├── AGENTS.md                           # AI Agent 协作规则与硬性约定
 ├── .agents/skills/
-│   ├── sprite-code-video/              # 贴图驱动代码动画视频导演 Skill
+│   ├── sprite2video/                   # 贴图驱动代码动画视频导演 Skill
 │   ├── video-sprite-pack/              # 角色贴图库生产与台词情绪路由 Skill
 │   └── latent-media/                   # 云端文生图 + 语音合成 Skill
 ├── public/
@@ -135,7 +135,7 @@ python .agents/skills/video-sprite-pack/scripts/match_script.py \
 
 ### 重新合成 10 个免版权短音效
 ```bash
-python .agents/skills/sprite-code-video/scripts/generate_sfx.py -o public/sfx
+python .agents/skills/sprite2video/scripts/generate_sfx.py -o public/sfx
 ```
 
 ---
@@ -145,11 +145,11 @@ python .agents/skills/sprite-code-video/scripts/generate_sfx.py -o public/sfx
 只要说出 **「竖屏」** 或 **「横屏」**，Agent 会自动绑定对应的版式、默认角色贴图库、默认音色和三规格封面：
 
 - **竖屏（默认：`dafeiyu` 9:16 + 蓝色大肥鱼贴图 + `voice-120` 配音）**
-  > `用 sprite-code-video 竖屏介绍 https://github.com/able8/weread-hot-booklists`
+  > `用 sprite2video 竖屏介绍 https://github.com/able8/weread-hot-booklists`
 - **横屏（默认：`capdim` 16:9 + Evil_Neuro_CN 贴图 + `evil-neuro-cn` 配音）**
-  > `用 sprite-code-video 横屏把这篇文章做成视频：<粘贴文章或文件路径>`
+  > `用 sprite2video 横屏把这篇文章做成视频：<粘贴文章或文件路径>`
 - **自定义混搭（随时覆盖角色 / 音色 / BGM）**
-  > `用 sprite-code-video 竖屏介绍 <链接>，角色用 evil-neuro-chibi，配音用 evil-neuro-cn`
+  > `用 sprite2video 竖屏介绍 <链接>，角色用 evil-neuro-chibi，配音用 evil-neuro-cn`
 
 ---
 
