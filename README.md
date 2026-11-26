@@ -140,6 +140,19 @@ python .agents/skills/sprite-code-video/scripts/generate_sfx.py -o public/sfx
 
 ---
 
+## 一句话提示词速查（快速指定横屏 / 竖屏）
+
+只要说出 **「竖屏」** 或 **「横屏」**，Agent 会自动绑定对应的版式、默认角色贴图库、默认音色和三规格封面：
+
+- **竖屏（默认：`dafeiyu` 9:16 + 蓝色大肥鱼贴图 + `voice-120` 配音）**
+  > `用 sprite-code-video 竖屏介绍 https://github.com/able8/weread-hot-booklists`
+- **横屏（默认：`capdim` 16:9 + Evil_Neuro_CN 贴图 + `evil-neuro-cn` 配音）**
+  > `用 sprite-code-video 横屏把这篇文章做成视频：<粘贴文章或文件路径>`
+- **自定义混搭（随时覆盖角色 / 音色 / BGM）**
+  > `用 sprite-code-video 竖屏介绍 <链接>，角色用 evil-neuro-chibi，配音用 evil-neuro-cn`
+
+---
+
 ## 致谢与灵感来源
 
 - 语音与文生图后端：[guohuiyuan/latent-media](https://github.com/guohuiyuan/latent-media)
