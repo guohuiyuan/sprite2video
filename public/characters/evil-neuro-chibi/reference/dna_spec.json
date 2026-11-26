@@ -1,0 +1,15 @@
+{
+  "name": "evil-neuro-chibi",
+  "updated_at": "2026-11-26T12:55:34",
+  "dna": "chibi, 1girl, moe, cute VTuber sticker style, bold clean black lineart, anime cel shading, single curved ahoge, light warm beige brown hair, medium long hair, parted wispy bangs, side hair locks, dark crimson red hair ribbon, black broken heart hairpin on bangs, large glossy crimson red eyes, dark upper iris, bright white eye highlights, soft pink cheek blush, tiny cute fang, black oversized long sleeve sweater, dark grey sailor collar, dark crimson red ribbon bow tie, upper body",
+  "bg": "white",
+  "mode": "grid_2x2",
+  "base_seed": 20261126,
+  "steps": 10,
+  "sampler": "euler",
+  "scheduler": "sgm_uniform",
+  "resolution": "square",
+  "negative_single": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, gradient background, border, frame, shadow on background, multiple girls, 2girls",
+  "negative_grid": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, overlapping panels, speech bubble, comic border lines",
+  "notes": ""
+}

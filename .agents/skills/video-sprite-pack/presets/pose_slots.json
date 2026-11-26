@@ -1,0 +1,163 @@
+{
+  "version": "1.0",
+  "default_canvas": 1024,
+  "grid_groups": {
+    "grid_core": {
+      "label": "核心高频 4 表情（招呼/疑问/破防/思考）",
+      "grid_prompt": "character expression sheet, 2x2 grid, 4 distinct panels on white background, same character in every panel, simple background, solid white background, four different expressions: top left happy closed eyes smiling waving hand, top right curious wide eyes tilting head, bottom left shocked angry wide white eyes clenched fists blushing sweatdrop, bottom right thinking furrowed brow hand on chin",
+      "quadrants": ["wave_happy", "curious", "shocked_fist", "thinking"]
+    },
+    "grid_react": {
+      "label": "吐槽与情绪 4 表情（拒接/扶额叹气/叉腰无语/自信得意）",
+      "grid_prompt": "character expression sheet, 2x2 grid, 4 distinct panels on white background, same character in every panel, simple background, solid white background, four different expressions: top left waving both hands refusing rejecting nervous smile, top right sighing facepalm hand on forehead closed eyes tired, bottom left hands on hips unimpressed deadpan stare, bottom right smug confident wink grin sparkles",
+      "quadrants": ["reject_wave", "sigh_facepalm", "deadpan_hips", "smug_wink"]
+    },
+    "grid_action": {
+      "label": "讲解与收尾 4 表情（拿放大镜/敲电脑/举星星求三连/敬礼道别）",
+      "grid_prompt": "character expression sheet, 2x2 grid, 4 distinct panels on white background, same character in every panel, simple background, solid white background, four different expressions: top left holding magnifying glass detective curious, top right typing on small laptop focused glasses, bottom left holding glowing golden star excited cheerful, bottom right saluting cheerful bright smile",
+      "quadrants": ["detective_glass", "typing_laptop", "celebrate_star", "salute_bye"]
+    }
+  },
+  "slots": {
+    "wave_happy": {
+      "label": "开心招手",
+      "prompt_tail": "happy, closed eyes smile, open mouth, waving hand, cheerful, sparkles",
+      "emotions": ["happy", "greeting", "warm", "friendly"],
+      "triggers": ["大家好", "欢迎", "今天", "聊聊", "介绍", "开源", "好消息", "真香", "可爱", "下期见"],
+      "audio_tags": ["[笑]", "[轻笑]", "[咯咯笑]"],
+      "default_motion": "bounce_happy",
+      "default_sfx": "pop",
+      "framing": "bust"
+    },
+    "curious": {
+      "label": "好奇疑问",
+      "prompt_tail": "curious, wide sparkling eyes, slight head tilt, small open mouth, question mark vibe",
+      "emotions": ["curious", "question", "neutral"],
+      "triggers": ["什么", "怎么", "为什么", "难道", "是不是", "好奇", "猜猜", "原理", "到底"],
+      "audio_tags": ["[吸气]", "[停顿]"],
+      "default_motion": "float_idle",
+      "default_sfx": "pop",
+      "framing": "bust"
+    },
+    "shocked_fist": {
+      "label": "震惊破防",
+      "prompt_tail": "shocked, wide white eyes, blushing, shouting, clenched fists, comic sweatdrop",
+      "emotions": ["shocked", "panic", "embarrassed", "dramatic"],
+      "triggers": ["离谱", "破防", "崩不住", "竟然", "居然", "万万没想到", "逆天", "吓人", "炸裂", "直接"],
+      "audio_tags": ["[惊呼]", "[喊叫]", "[惨叫]"],
+      "default_motion": "shake_angry",
+      "default_sfx": "thud",
+      "framing": "bust"
+    },
+    "thinking": {
+      "label": "托下巴思考",
+      "prompt_tail": "thinking, hand on chin, slight frown, focused eyes, thoughtful, small thought puff",
+      "emotions": ["thinking", "analyze", "serious"],
+      "triggers": ["思考", "分析", "逻辑", "架构", "核心", "关键", "对比", "区别", "其实", "本质"],
+      "audio_tags": ["[闷哼]", "[清嗓]"],
+      "default_motion": "nod",
+      "default_sfx": "tick",
+      "framing": "bust"
+    },
+    "happy_point": {
+      "label": "开心指点",
+      "prompt_tail": "happy, bright smile, open mouth, pointing index finger up, cheerful, yellow sparkles",
+      "emotions": ["explain", "highlight", "excited"],
+      "triggers": ["重点", "第一个", "第二个", "第三个", "推荐", "试试", "记住", "技巧", "秘诀", "核心是"],
+      "audio_tags": ["[轻笑]"],
+      "default_motion": "pop_in",
+      "default_sfx": "ding",
+      "framing": "bust"
+    },
+    "angry_fist": {
+      "label": "生气握拳吐槽",
+      "prompt_tail": "angry, furrowed brow, shouting, clenched fists, anime anger vein, fierce expression",
+      "emotions": ["angry", "rant", "frustrated"],
+      "triggers": ["看不上", "生气", "吐槽", "坑", "翻车", "别再", "不要", "讨厌", "太差", "难用", "反常识"],
+      "audio_tags": ["[喊叫]", "[哼鼻子]", "[啧嘴]"],
+      "default_motion": "shake_angry",
+      "default_sfx": "stamp",
+      "framing": "bust"
+    },
+    "reject_wave": {
+      "label": "摆手拒绝",
+      "prompt_tail": "waving both hands in front, refusing, rejecting, nervous smile, polite decline",
+      "emotions": ["reject", "caution", "no"],
+      "triggers": ["不需要", "不建议", "不用", "不是", "千万别", "没用", "不删", "拒绝", "算了"],
+      "audio_tags": ["[呼气]"],
+      "default_motion": "shake_angry",
+      "default_sfx": "whoosh",
+      "framing": "bust"
+    },
+    "sigh_facepalm": {
+      "label": "扶额叹气",
+      "prompt_tail": "sighing, facepalm, hand on forehead, closed eyes, exasperated, tired",
+      "emotions": ["sigh", "tired", "helpless"],
+      "triggers": ["叹气", "无奈", "没办法", "折腾", "头疼", "麻烦", "可惜", "痛点", "老毛病"],
+      "audio_tags": ["[叹气]", "[呼气]"],
+      "default_motion": "nod",
+      "default_sfx": "thud",
+      "framing": "bust"
+    },
+    "deadpan_hips": {
+      "label": "叉腰无语",
+      "prompt_tail": "hands on hips, unimpressed, deadpan half-closed eyes, flat mouth, skeptical",
+      "emotions": ["deadpan", "skeptical", "calm"],
+      "triggers": ["理性", "冷静", "说实话", "别吹", "黑话", "饭圈", "平淡", "差不多", "克制"],
+      "audio_tags": ["[冷笑]", "[咂嘴]"],
+      "default_motion": "float_idle",
+      "default_sfx": "tick",
+      "framing": "bust"
+    },
+    "smug_wink": {
+      "label": "得意眨眼",
+      "prompt_tail": "smug, confident wink, playful grin, peace sign, sparkling eyes",
+      "emotions": ["proud", "smug", "clever"],
+      "triggers": ["轻松", "搞定", "秒杀", "丝滑", "一下就", "人话", "神器", "高级", "厉害", "实测"],
+      "audio_tags": ["[轻笑]", "[咯咯笑]"],
+      "default_motion": "bounce_happy",
+      "default_sfx": "sparkle",
+      "framing": "bust"
+    },
+    "detective_glass": {
+      "label": "放大镜查案",
+      "prompt_tail": "holding magnifying glass up to eye, curious detective expression, inspecting closely",
+      "emotions": ["inspect", "evidence", "check"],
+      "triggers": ["检测", "破绽", "指纹", "实测", "数据", "源码", "细节", "报告", "揪出", "审查"],
+      "audio_tags": ["[吸气]"],
+      "default_motion": "pop_in",
+      "default_sfx": "ding",
+      "framing": "bust"
+    },
+    "typing_laptop": {
+      "label": "敲代码演示",
+      "prompt_tail": "typing on small silver laptop, focused smile, round glasses, coding vibe",
+      "emotions": ["coding", "install", "demo"],
+      "triggers": ["命令", "安装", "代码", "终端", "npx", "git", "脚本", "配置", "运行", "skill"],
+      "audio_tags": ["[轻笑]"],
+      "default_motion": "float_idle",
+      "default_sfx": "tick",
+      "framing": "bust"
+    },
+    "celebrate_star": {
+      "label": "举星求三连",
+      "prompt_tail": "holding a glowing golden star with both hands, sparkling eyes, excited happy smile",
+      "emotions": ["cta", "star", "celebrate"],
+      "triggers": ["star", "点赞", "关注", "三连", "收藏", "支持", "开源项目", "颗星", "爆火"],
+      "audio_tags": ["[笑]", "[轻笑]"],
+      "default_motion": "bounce_happy",
+      "default_sfx": "sparkle",
+      "framing": "bust"
+    },
+    "salute_bye": {
+      "label": "敬礼收官",
+      "prompt_tail": "saluting with right hand, cheerful bright smile, confident friendly expression",
+      "emotions": ["outro", "salute", "respect"],
+      "triggers": ["总结", "收官", "最后一", "坚持", "探索", "拜拜", "再见", "完结"],
+      "audio_tags": ["[笑]"],
+      "default_motion": "pop_in",
+      "default_sfx": "sparkle",
+      "framing": "bust"
+    }
+  }
+}

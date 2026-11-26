@@ -1,0 +1,5 @@
+# SINGLE_NEGATIVE
+lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, gradient background, border, frame, shadow on background, multiple girls, 2girls
+
+# GRID_NEGATIVE
+lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, overlapping panels, speech bubble, comic border lines

@@ -1,0 +1,246 @@
+{
+  "schema": "video-sprite-pack/v1",
+  "character": {
+    "id": "demo-chibi",
+    "name": "示例蓝发小助手",
+    "default_pose": "wave_happy",
+    "canvas": [
+      1024,
+      1024
+    ]
+  },
+  "sprites": [
+    {
+      "id": "angry_fist",
+      "label": "生气握拳吐槽",
+      "file": "characters/demo-chibi/sprites/angry_fist.png",
+      "source": "raw/angry_fist.png",
+      "framing": "bust",
+      "emotions": [
+        "angry",
+        "rant",
+        "frustrated"
+      ],
+      "triggers": [
+        "看不上",
+        "生气",
+        "吐槽",
+        "坑",
+        "翻车",
+        "别再",
+        "不要",
+        "讨厌",
+        "太差",
+        "难用",
+        "反常识"
+      ],
+      "audio_tags": [
+        "[喊叫]",
+        "[哼鼻子]",
+        "[啧嘴]"
+      ],
+      "default_motion": "shake_angry",
+      "default_sfx": "stamp",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "wave_happy",
+      "label": "开心招手",
+      "file": "characters/demo-chibi/sprites/wave_happy.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "happy",
+        "greeting",
+        "warm",
+        "friendly"
+      ],
+      "triggers": [
+        "大家好",
+        "欢迎",
+        "今天",
+        "聊聊",
+        "介绍",
+        "开源",
+        "好消息",
+        "真香",
+        "可爱",
+        "下期见"
+      ],
+      "audio_tags": [
+        "[笑]",
+        "[轻笑]",
+        "[咯咯笑]"
+      ],
+      "default_motion": "bounce_happy",
+      "default_sfx": "pop",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "curious",
+      "label": "好奇疑问",
+      "file": "characters/demo-chibi/sprites/curious.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "curious",
+        "question",
+        "neutral"
+      ],
+      "triggers": [
+        "什么",
+        "怎么",
+        "为什么",
+        "难道",
+        "是不是",
+        "好奇",
+        "猜猜",
+        "原理",
+        "到底"
+      ],
+      "audio_tags": [
+        "[吸气]",
+        "[停顿]"
+      ],
+      "default_motion": "float_idle",
+      "default_sfx": "pop",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "shocked_fist",
+      "label": "震惊破防",
+      "file": "characters/demo-chibi/sprites/shocked_fist.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "shocked",
+        "panic",
+        "embarrassed",
+        "dramatic"
+      ],
+      "triggers": [
+        "离谱",
+        "破防",
+        "崩不住",
+        "竟然",
+        "居然",
+        "万万没想到",
+        "逆天",
+        "吓人",
+        "炸裂",
+        "直接"
+      ],
+      "audio_tags": [
+        "[惊呼]",
+        "[喊叫]",
+        "[惨叫]"
+      ],
+      "default_motion": "shake_angry",
+      "default_sfx": "thud",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "thinking",
+      "label": "托下巴思考",
+      "file": "characters/demo-chibi/sprites/thinking.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "thinking",
+        "analyze",
+        "serious"
+      ],
+      "triggers": [
+        "思考",
+        "分析",
+        "逻辑",
+        "架构",
+        "核心",
+        "关键",
+        "对比",
+        "区别",
+        "其实",
+        "本质"
+      ],
+      "audio_tags": [
+        "[闷哼]",
+        "[清嗓]"
+      ],
+      "default_motion": "nod",
+      "default_sfx": "tick",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "happy_point",
+      "label": "开心指点",
+      "file": "characters/demo-chibi/sprites/happy_point.png",
+      "source": "raw/happy_point.png",
+      "framing": "bust",
+      "emotions": [
+        "explain",
+        "highlight",
+        "excited"
+      ],
+      "triggers": [
+        "重点",
+        "第一个",
+        "第二个",
+        "第三个",
+        "推荐",
+        "试试",
+        "记住",
+        "技巧",
+        "秘诀",
+        "核心是"
+      ],
+      "audio_tags": [
+        "[轻笑]"
+      ],
+      "default_motion": "pop_in",
+      "default_sfx": "ding",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ]
+}

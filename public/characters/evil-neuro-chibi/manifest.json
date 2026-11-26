@@ -1,0 +1,463 @@
+{
+  "schema": "video-sprite-pack/v1",
+  "character": {
+    "id": "evil-neuro-chibi",
+    "name": "Evil_Neuro_CN (萌版)",
+    "default_pose": "wave_happy",
+    "canvas": [
+      1024,
+      1024
+    ]
+  },
+  "sprites": [
+    {
+      "id": "detective_glass",
+      "label": "放大镜查案",
+      "file": "characters/evil-neuro-chibi/sprites/detective_glass.png",
+      "source": "raw/grid_action.png",
+      "framing": "bust",
+      "emotions": [
+        "inspect",
+        "evidence",
+        "check"
+      ],
+      "triggers": [
+        "检测",
+        "破绽",
+        "指纹",
+        "实测",
+        "数据",
+        "源码",
+        "细节",
+        "报告",
+        "揪出",
+        "审查"
+      ],
+      "audio_tags": [
+        "[吸气]"
+      ],
+      "default_motion": "pop_in",
+      "default_sfx": "ding",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "typing_laptop",
+      "label": "敲代码演示",
+      "file": "characters/evil-neuro-chibi/sprites/typing_laptop.png",
+      "source": "raw/grid_action.png",
+      "framing": "bust",
+      "emotions": [
+        "coding",
+        "install",
+        "demo"
+      ],
+      "triggers": [
+        "命令",
+        "安装",
+        "代码",
+        "终端",
+        "npx",
+        "git",
+        "脚本",
+        "配置",
+        "运行",
+        "skill"
+      ],
+      "audio_tags": [
+        "[轻笑]"
+      ],
+      "default_motion": "float_idle",
+      "default_sfx": "tick",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "celebrate_star",
+      "label": "举星求三连",
+      "file": "characters/evil-neuro-chibi/sprites/celebrate_star.png",
+      "source": "raw/grid_action.png",
+      "framing": "bust",
+      "emotions": [
+        "cta",
+        "star",
+        "celebrate"
+      ],
+      "triggers": [
+        "star",
+        "点赞",
+        "关注",
+        "三连",
+        "收藏",
+        "支持",
+        "开源项目",
+        "颗星",
+        "爆火"
+      ],
+      "audio_tags": [
+        "[笑]",
+        "[轻笑]"
+      ],
+      "default_motion": "bounce_happy",
+      "default_sfx": "sparkle",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "salute_bye",
+      "label": "敬礼收官",
+      "file": "characters/evil-neuro-chibi/sprites/salute_bye.png",
+      "source": "raw/grid_action.png",
+      "framing": "bust",
+      "emotions": [
+        "outro",
+        "salute",
+        "respect"
+      ],
+      "triggers": [
+        "总结",
+        "收官",
+        "最后一",
+        "坚持",
+        "探索",
+        "拜拜",
+        "再见",
+        "完结"
+      ],
+      "audio_tags": [
+        "[笑]"
+      ],
+      "default_motion": "pop_in",
+      "default_sfx": "sparkle",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "wave_happy",
+      "label": "开心招手",
+      "file": "characters/evil-neuro-chibi/sprites/wave_happy.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "happy",
+        "greeting",
+        "warm",
+        "friendly"
+      ],
+      "triggers": [
+        "大家好",
+        "欢迎",
+        "今天",
+        "聊聊",
+        "介绍",
+        "开源",
+        "好消息",
+        "真香",
+        "可爱",
+        "下期见"
+      ],
+      "audio_tags": [
+        "[笑]",
+        "[轻笑]",
+        "[咯咯笑]"
+      ],
+      "default_motion": "bounce_happy",
+      "default_sfx": "pop",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "curious",
+      "label": "好奇疑问",
+      "file": "characters/evil-neuro-chibi/sprites/curious.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "curious",
+        "question",
+        "neutral"
+      ],
+      "triggers": [
+        "什么",
+        "怎么",
+        "为什么",
+        "难道",
+        "是不是",
+        "好奇",
+        "猜猜",
+        "原理",
+        "到底"
+      ],
+      "audio_tags": [
+        "[吸气]",
+        "[停顿]"
+      ],
+      "default_motion": "float_idle",
+      "default_sfx": "pop",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "shocked_fist",
+      "label": "震惊破防",
+      "file": "characters/evil-neuro-chibi/sprites/shocked_fist.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "shocked",
+        "panic",
+        "embarrassed",
+        "dramatic"
+      ],
+      "triggers": [
+        "离谱",
+        "破防",
+        "崩不住",
+        "竟然",
+        "居然",
+        "万万没想到",
+        "逆天",
+        "吓人",
+        "炸裂",
+        "直接"
+      ],
+      "audio_tags": [
+        "[惊呼]",
+        "[喊叫]",
+        "[惨叫]"
+      ],
+      "default_motion": "shake_angry",
+      "default_sfx": "thud",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "thinking",
+      "label": "托下巴思考",
+      "file": "characters/evil-neuro-chibi/sprites/thinking.png",
+      "source": "raw/grid_core.png",
+      "framing": "bust",
+      "emotions": [
+        "thinking",
+        "analyze",
+        "serious"
+      ],
+      "triggers": [
+        "思考",
+        "分析",
+        "逻辑",
+        "架构",
+        "核心",
+        "关键",
+        "对比",
+        "区别",
+        "其实",
+        "本质"
+      ],
+      "audio_tags": [
+        "[闷哼]",
+        "[清嗓]"
+      ],
+      "default_motion": "nod",
+      "default_sfx": "tick",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "reject_wave",
+      "label": "摆手拒绝",
+      "file": "characters/evil-neuro-chibi/sprites/reject_wave.png",
+      "source": "raw/grid_react.png",
+      "framing": "bust",
+      "emotions": [
+        "reject",
+        "caution",
+        "no"
+      ],
+      "triggers": [
+        "不需要",
+        "不建议",
+        "不用",
+        "不是",
+        "千万别",
+        "没用",
+        "不删",
+        "拒绝",
+        "算了"
+      ],
+      "audio_tags": [
+        "[呼气]"
+      ],
+      "default_motion": "shake_angry",
+      "default_sfx": "whoosh",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "sigh_facepalm",
+      "label": "扶额叹气",
+      "file": "characters/evil-neuro-chibi/sprites/sigh_facepalm.png",
+      "source": "raw/grid_react.png",
+      "framing": "bust",
+      "emotions": [
+        "sigh",
+        "tired",
+        "helpless"
+      ],
+      "triggers": [
+        "叹气",
+        "无奈",
+        "没办法",
+        "折腾",
+        "头疼",
+        "麻烦",
+        "可惜",
+        "痛点",
+        "老毛病"
+      ],
+      "audio_tags": [
+        "[叹气]",
+        "[呼气]"
+      ],
+      "default_motion": "nod",
+      "default_sfx": "thud",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "deadpan_hips",
+      "label": "叉腰无语",
+      "file": "characters/evil-neuro-chibi/sprites/deadpan_hips.png",
+      "source": "raw/grid_react.png",
+      "framing": "bust",
+      "emotions": [
+        "deadpan",
+        "skeptical",
+        "calm"
+      ],
+      "triggers": [
+        "理性",
+        "冷静",
+        "说实话",
+        "别吹",
+        "黑话",
+        "饭圈",
+        "平淡",
+        "差不多",
+        "克制"
+      ],
+      "audio_tags": [
+        "[冷笑]",
+        "[咂嘴]"
+      ],
+      "default_motion": "float_idle",
+      "default_sfx": "tick",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": "smug_wink",
+      "label": "得意眨眼",
+      "file": "characters/evil-neuro-chibi/sprites/smug_wink.png",
+      "source": "raw/grid_react.png",
+      "framing": "bust",
+      "emotions": [
+        "proud",
+        "smug",
+        "clever"
+      ],
+      "triggers": [
+        "轻松",
+        "搞定",
+        "秒杀",
+        "丝滑",
+        "一下就",
+        "人话",
+        "神器",
+        "高级",
+        "厉害",
+        "实测"
+      ],
+      "audio_tags": [
+        "[轻笑]",
+        "[咯咯笑]"
+      ],
+      "default_motion": "bounce_happy",
+      "default_sfx": "sparkle",
+      "anchor": {
+        "x": 0.5,
+        "y": 1.0
+      },
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ]
+}

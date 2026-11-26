@@ -1,0 +1,23 @@
+# Dependencies & build
+node_modules/
+out/
+dist/
+.remotion/
+__pycache__/
+*.pyc
+
+# Secrets & local state
+keys.env
+.env
+.env.local
+voices.json
+
+# Scratch / local project working dirs & third-party downloaded audio
+work/
+public/audio/
+demo_routed.json
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.log
