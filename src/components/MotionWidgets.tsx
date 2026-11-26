@@ -67,7 +67,7 @@ export const CompareBar: React.FC<{
         fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
       }}
     >
-      <div style={{ width: 120, textAlign: "right", fontSize: 32, fontWeight: 800, color: "#ffffff" }}>
+      <div style={{ width: 158, textAlign: "right", fontSize: 30, fontWeight: 800, color: "#ffffff", whiteSpace: "nowrap" }}>
         {label}
       </div>
       <div

@@ -4,12 +4,15 @@ export interface BilingualSubtitleProps {
   zh: string;
   en?: string;
   styleMode?: "dafeiyu" | "capdim";
+  /** Optional [0..1] karaoke sweep progress highlighting spoken Chinese characters in gold */
+  highlightProgress?: number;
 }
 
 export const BilingualSubtitle: React.FC<BilingualSubtitleProps> = ({
   zh,
   en,
   styleMode = "dafeiyu",
+  highlightProgress,
 }) => {
   if (styleMode === "capdim") {
     return (
@@ -43,41 +46,57 @@ export const BilingualSubtitle: React.FC<BilingualSubtitleProps> = ({
     );
   }
 
+  const splitIdx =
+    typeof highlightProgress === "number"
+      ? Math.max(0, Math.min(zh.length, Math.ceil(zh.length * highlightProgress)))
+      : 0;
+
   return (
     <div
       style={{
         position: "absolute",
-        left: 44,
-        right: 44,
-        bottom: 58,
+        left: 40,
+        right: 40,
+        bottom: 68,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: 8,
+        gap: 10,
         textAlign: "center",
         fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
+        zIndex: 55,
       }}
     >
       <div
         style={{
-          fontSize: 44,
+          fontSize: 52,
           fontWeight: 900,
           color: "#ffffff",
-          lineHeight: 1.25,
-          WebkitTextStroke: "2px #0f172a",
+          lineHeight: 1.24,
+          WebkitTextStroke: "3.5px #0f172a",
+          paintOrder: "stroke fill",
           textShadow:
-            "0 3px 0 #0f172a, 0 6px 16px rgba(0,0,0,0.55)",
+            "0 4px 0 #0f172a, 0 8px 20px rgba(0,0,0,0.72)",
         }}
       >
-        {zh}
+        {splitIdx > 0 ? (
+          <>
+            <span style={{ color: "#fde047" }}>{zh.slice(0, splitIdx)}</span>
+            <span>{zh.slice(splitIdx)}</span>
+          </>
+        ) : (
+          zh
+        )}
       </div>
       {en ? (
         <div
           style={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: "#e2e8f0",
-            textShadow: "0 2px 6px rgba(0,0,0,0.85)",
+            fontSize: 27,
+            fontWeight: 800,
+            color: "#f8fafc",
+            WebkitTextStroke: "2px #0f172a",
+            paintOrder: "stroke fill",
+            textShadow: "0 3px 10px rgba(0,0,0,0.9)",
           }}
         >
           {en}

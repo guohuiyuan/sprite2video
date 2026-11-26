@@ -139,6 +139,7 @@ def main() -> int:
     parser.add_argument("--scheduler", default="sgm_uniform", choices=["sgm_uniform", "beta", "beta57", "linear_quadratic"])
     parser.add_argument("--force", action="store_true", help="Archive existing raw images and regenerate")
     parser.add_argument("--ref-image", default="", help="Optional reference image path to preserve in reference/")
+    parser.add_argument("--extra-negative", default="", help="Extra negative prompt terms appended to base negative")
     parser.add_argument("--notes", default="", help="Optional character design / reverse-prompt notes for dna_spec.json")
     parser.add_argument("--dry-run", action="store_true", help="Print prompts without calling API")
     args = parser.parse_args()
@@ -151,6 +152,10 @@ def main() -> int:
 
     presets = json.loads(PRESETS_FILE.read_text(encoding="utf-8"))
     neg_single, neg_grid = load_negatives()
+    if args.extra_negative.strip():
+        extra = args.extra_negative.strip().strip(",")
+        neg_single = f"{neg_single}, {extra}"
+        neg_grid = f"{neg_grid}, {extra}"
     pack_dir = PROJECT_ROOT / "public" / "characters" / args.name
     raw_dir = pack_dir / "raw"
     archive_dir = raw_dir / "archive"

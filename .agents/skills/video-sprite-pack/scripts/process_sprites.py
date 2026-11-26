@@ -37,10 +37,15 @@ def detect_bg_color(rgb: np.ndarray) -> np.ndarray:
     return np.median(border, axis=0).astype(np.float32)
 
 
-def cutout_solid_background(pil_img: Image.Image, tol: float = 28.0, soft_band: float = 18.0) -> Image.Image:
+def cutout_solid_background(
+    pil_img: Image.Image,
+    tol: float = 28.0,
+    soft_band: float = 18.0,
+    remove_inner_pockets: bool = True,
+) -> Image.Image:
     """
     Remove outer solid backdrop (white or chroma green/blue) via border-seeded floodfill,
-    preserving interior white clothing/eyes protected by anime lineart, then softly
+    preserving interior white clothing/headbands/eyes protected by anime lineart, then softly
     feather & decontaminate the 1-2px outer halo.
     """
     rgba = np.array(pil_img.convert("RGBA"))
@@ -50,35 +55,39 @@ def cutout_solid_background(pil_img: Image.Image, tol: float = 28.0, soft_band: 
     bg = detect_bg_color(rgb)
     dist = np.linalg.norm(rgb - bg[None, None, :], axis=2)
 
-    # Candidate background pixels: within tol of detected backdrop color
+    # Candidate background pixels: within tol of detected backdrop color.
+    # Gently close 1-2px micro-gaps in thin white-lace/anime lineart before border floodfill
+    # so outer floodfill cannot leak into white headbands/collars, then expand outer bg back by 1px.
     bg_candidate = (dist <= tol).astype(np.uint8)
+    k3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    fg_sealed = cv2.dilate((1 - bg_candidate).astype(np.uint8), k3, iterations=1)
+    bg_sealed = (1 - fg_sealed).astype(np.uint8)
 
-    # Connected components on bg_candidate; keep components touching the outer border
-    num_labels, labels = cv2.connectedComponents(bg_candidate, connectivity=4)
+    num_labels, labels = cv2.connectedComponents(bg_sealed, connectivity=4)
     border_labels = set(
         np.concatenate([labels[0, :], labels[h - 1, :], labels[:, 0], labels[:, w - 1]]).tolist()
     )
     border_labels.discard(0)
 
-    is_outer_bg = np.isin(labels, list(border_labels))
+    outer_sealed = np.isin(labels, list(border_labels)).astype(np.uint8)
+    is_outer_bg = (cv2.dilate(outer_sealed, k3, iterations=1) > 0) & (bg_candidate > 0)
 
-    # Also catch clean inner pockets completely matching bg if they are large enough (>0.15% area)
-    # and very close to bg color (e.g. gap between bent arm and torso) while sparing eyes/tiny shine
-    strict_bg = (dist <= tol * 0.55).astype(np.uint8)
-    n2, l2, stats, _ = cv2.connectedComponentsWithStats(strict_bg, connectivity=4)
-    min_pocket = int(h * w * 0.0018)
-    for lbl in range(1, n2):
-        area = stats[lbl, cv2.CC_STAT_AREA]
-        if area >= min_pocket:
-            # Verify it's truly close to pure background color on average
-            mask_lbl = l2 == lbl
-            if float(dist[mask_lbl].mean()) < tol * 0.35:
-                # Only treat as background if it does NOT sit in the upper-center face/shirt core
-                cx = stats[lbl, cv2.CC_STAT_LEFT] + stats[lbl, cv2.CC_STAT_WIDTH] / 2
-                cy = stats[lbl, cv2.CC_STAT_TOP] + stats[lbl, cv2.CC_STAT_HEIGHT] / 2
-                in_core = (0.32 * w <= cx <= 0.68 * w) and (0.25 * h <= cy <= 0.85 * h)
-                if not in_core:
-                    is_outer_bg |= mask_lbl
+    # Optional inner pocket removal (e.g. gap between arm and torso), strictly sparing head/hat/headband/torso core
+    if remove_inner_pockets:
+        strict_bg = (dist <= tol * 0.45).astype(np.uint8)
+        n2, l2, stats, _ = cv2.connectedComponentsWithStats(strict_bg, connectivity=4)
+        min_pocket = int(h * w * 0.004)
+        for lbl in range(1, n2):
+            area = stats[lbl, cv2.CC_STAT_AREA]
+            if area >= min_pocket:
+                mask_lbl = l2 == lbl
+                if float(dist[mask_lbl].mean()) < tol * 0.25:
+                    cx = stats[lbl, cv2.CC_STAT_LEFT] + stats[lbl, cv2.CC_STAT_WIDTH] / 2
+                    cy = stats[lbl, cv2.CC_STAT_TOP] + stats[lbl, cv2.CC_STAT_HEIGHT] / 2
+                    # Protect entire head/headband/face/apron/torso core (0.04..0.92 vertical, 0.16..0.84 horizontal)
+                    in_core = (0.16 * w <= cx <= 0.84 * w) and (0.04 * h <= cy <= 0.92 * h)
+                    if not in_core:
+                        is_outer_bg |= mask_lbl
 
     alpha = np.where(is_outer_bg, 0.0, 255.0).astype(np.float32)
 
@@ -137,7 +146,7 @@ def normalize_sprite(sprite: Image.Image, canvas_size: int = 1024, fill_ratio: f
     return canvas, {"x": 0.5, "y": 1.0}
 
 
-def slice_grid_2x2(img: Image.Image, trim_px: int = 4) -> list[Image.Image]:
+def slice_grid_2x2(img: Image.Image, trim_px: int = 8) -> list[Image.Image]:
     w, h = img.size
     mx, my = w // 2, h // 2
     boxes = [
@@ -187,8 +196,9 @@ def build_consistency_sheet(
     out_path: Path,
     cell: int = 300,
     cols: int = 5,
+    preview_bg: str = "paper",
 ) -> None:
-    """Build side-by-side consistency QA sheet: reference image + all sprites as die-cut stickers on graph paper."""
+    """Build side-by-side consistency QA sheet: reference image + all sprites on paper or dark ocean BG."""
     tiles: list[tuple[str, Image.Image, bool]] = []
     if ref_dir.exists():
         for rp in sorted(ref_dir.iterdir()):
@@ -202,11 +212,15 @@ def build_consistency_sheet(
                 tiles.append(("REFERENCE", box, True))
                 break
 
-    paper = make_paper_tile(cell, cell)
+    if preview_bg == "dark":
+        bg_tile = Image.new("RGBA", (cell, cell), (12, 34, 64, 255))
+    else:
+        bg_tile = make_paper_tile(cell, cell)
+
     for slot_id, label, sprite in items:
-        sticker = add_die_cut_border(sprite, border_px=12)
+        sticker = sprite if preview_bg == "dark" else add_die_cut_border(sprite, border_px=12)
         thumb = sticker.resize((cell, cell), Image.Resampling.LANCZOS)
-        tile = paper.copy()
+        tile = bg_tile.copy()
         tile.alpha_composite(thumb, (0, 0))
         tiles.append((f"{slot_id} ({label})", tile, False))
 
@@ -274,6 +288,8 @@ def main() -> int:
     parser.add_argument("--pack", required=True, help="Path to character pack dir (e.g. public/characters/demo-chibi)")
     parser.add_argument("--canvas", type=int, default=1024, help="Output square PNG size")
     parser.add_argument("--tol", type=float, default=28.0, help="Background floodfill color distance tolerance")
+    parser.add_argument("--no-inner-pockets", action="store_true", help="Strictly keep all enclosed interior areas (best for white hats/headbands)")
+    parser.add_argument("--preview-bg", choices=["paper", "dark"], default="paper", help="Background for consistency_sheet.png preview")
     parser.add_argument("--fill-ratio", type=float, default=0.90, help="Subject fill ratio on output canvas")
     parser.add_argument("--display-name", default="", help="Human-readable character name for manifest.json")
     args = parser.parse_args()
@@ -319,7 +335,11 @@ def main() -> int:
     sheet_items: list[tuple[str, str, Image.Image]] = []
 
     for slot_id, (raw_img, source_rel) in collected.items():
-        cut = cutout_solid_background(raw_img, tol=args.tol)
+        cut = cutout_solid_background(
+            raw_img,
+            tol=args.tol,
+            remove_inner_pockets=not args.no_inner_pockets,
+        )
         norm, anchor = normalize_sprite(cut, canvas_size=args.canvas, fill_ratio=args.fill_ratio)
         out_png = sprites_dir / f"{slot_id}.png"
         norm.save(out_png, "PNG")
@@ -348,7 +368,7 @@ def main() -> int:
     build_contact_sheet(sheet_items, contact_path)
 
     consistency_path = pack_dir / "consistency" / "consistency_sheet.png"
-    build_consistency_sheet(sheet_items, pack_dir / "reference", consistency_path)
+    build_consistency_sheet(sheet_items, pack_dir / "reference", consistency_path, preview_bg=args.preview_bg)
 
     sprite_ids = [s["id"] for s in manifest_sprites]
     preferred_default = next(

@@ -16,6 +16,7 @@ voices.json
 work/
 public/audio/
 demo_routed.json
+**/raw/archive/
 
 # OS / Editor
 .DS_Store

@@ -19,6 +19,8 @@ export type BilibiliCoverProps = {
   accentSprite?: string;
   /** Small bottom-left corner stamp (e.g. "Evil_Neuro_CN 全程配音") */
   cornerBadge?: string;
+  /** Visual theme: capdim (vintage paper) or dafeiyu (vibrant ocean sunburst) */
+  theme?: "capdim" | "dafeiyu";
 };
 
 const FONT = "'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif";
@@ -28,7 +30,7 @@ const CRIMSON = "#d61f2c";
 /**
  * High-CTR Bilibili cover renderer supporting both 16:9 (1920x1080) and 4:3 (1440x1080).
  * Keeps bottom-right clear of Bilibili duration pill and renders bold mobile-legible type
- * paired with Capdim vintage graph paper + white die-cut Evil Neuro stickers.
+ * paired with Capdim vintage graph paper or Dafeiyu vibrant sunburst + die-cut stickers.
  */
 export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
   eyebrow,
@@ -39,23 +41,30 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
   mainSprite,
   accentSprite,
   cornerBadge = "Evil_Neuro_CN · 萌版贴图解说",
+  theme = "capdim",
 }) => {
   const { width } = useVideoConfig();
   const is4x3 = width < 1700;
+  const isDafeiyu = theme === "dafeiyu";
 
   const padX = is4x3 ? 64 : 92;
   const h1Size = is4x3 ? 112 : 134;
   const h2Size = is4x3 ? 124 : 148;
   const mainSize = is4x3 ? 650 : 790;
+  const slabBg = isDafeiyu ? "#0284c7" : CRIMSON;
 
   const dieCutHeavy =
-    "drop-shadow(5px 0 0 #ffffff) drop-shadow(-5px 0 0 #ffffff) drop-shadow(0 5px 0 #ffffff) drop-shadow(0 -5px 0 #ffffff) drop-shadow(4px 4px 0 #ffffff) drop-shadow(-4px -4px 0 #ffffff) drop-shadow(0 18px 30px rgba(32, 24, 16, 0.28))";
+    "drop-shadow(5px 0 0 #ffffff) drop-shadow(-5px 0 0 #ffffff) drop-shadow(0 5px 0 #ffffff) drop-shadow(0 -5px 0 #ffffff) drop-shadow(4px 4px 0 #ffffff) drop-shadow(-4px -4px 0 #ffffff) drop-shadow(0 18px 30px rgba(10, 18, 36, 0.36))";
 
   return (
     <AbsoluteFill style={{ overflow: "hidden", fontFamily: FONT }}>
-      <DynamicBackground variant="paper" />
+      {isDafeiyu ? (
+        <DynamicBackground variant="sunburst" accent="#0284c7" secondary="#082f49" />
+      ) : (
+        <DynamicBackground variant="paper" />
+      )}
 
-      {/* Dramatic warm comic radial accent behind character */}
+      {/* Dramatic radial accent behind character */}
       <div
         style={{
           position: "absolute",
@@ -64,17 +73,20 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
           width: is4x3 ? 900 : 1080,
           height: is4x3 ? 900 : 1080,
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(220,38,38,0.16) 0%, rgba(251,191,36,0.14) 44%, transparent 72%)",
+          background: isDafeiyu
+            ? "radial-gradient(circle, rgba(56,189,248,0.45) 0%, rgba(250,204,21,0.18) 44%, transparent 72%)"
+            : "radial-gradient(circle, rgba(220,38,38,0.16) 0%, rgba(251,191,36,0.14) 44%, transparent 72%)",
         }}
       />
 
-      {/* Crisp retro notebook frame border */}
+      {/* Crisp frame border */}
       <div
         style={{
           position: "absolute",
           inset: 22,
-          border: "4px solid rgba(28, 25, 23, 0.22)",
+          border: isDafeiyu
+            ? "4px solid rgba(255, 255, 255, 0.35)"
+            : "4px solid rgba(28, 25, 23, 0.22)",
           borderRadius: 24,
           pointerEvents: "none",
         }}
@@ -93,7 +105,7 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
           alignItems: "flex-start",
         }}
       >
-        {/* Punchy red-black eyebrow ribbon */}
+        {/* Punchy eyebrow ribbon */}
         <div
           style={{
             display: "inline-flex",
@@ -101,17 +113,19 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
             gap: 14,
             padding: "12px 30px",
             borderRadius: 16,
-            backgroundColor: INK,
+            backgroundColor: isDafeiyu ? "#0f172a" : INK,
             color: "#fef08a",
             fontSize: is4x3 ? 32 : 36,
             fontWeight: 900,
             letterSpacing: 1,
             transform: "rotate(-1.5deg)",
-            boxShadow: "0 0 0 6px #ffffff, 8px 10px 0 rgba(214, 31, 44, 0.92)",
+            boxShadow: isDafeiyu
+              ? "0 0 0 6px #ffffff, 8px 10px 0 rgba(56, 189, 248, 0.95)"
+              : "0 0 0 6px #ffffff, 8px 10px 0 rgba(214, 31, 44, 0.92)",
             marginBottom: 34,
           }}
         >
-          <span style={{ color: "#ff5c67" }}>▶</span>
+          <span style={{ color: isDafeiyu ? "#38bdf8" : "#ff5c67" }}>▶</span>
           <span>{eyebrow}</span>
         </div>
 
@@ -120,17 +134,20 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
           style={{
             fontSize: h1Size,
             fontWeight: 900,
-            color: INK,
+            color: isDafeiyu ? "#ffffff" : INK,
             lineHeight: 1.08,
             letterSpacing: -2,
-            textShadow:
-              "6px 0 0 #fffdf8, -6px 0 0 #fffdf8, 0 6px 0 #fffdf8, 0 -6px 0 #fffdf8, 4px 4px 0 #fffdf8, -4px -4px 0 #fffdf8, 0 12px 24px rgba(0,0,0,0.16)",
+            WebkitTextStroke: isDafeiyu ? "6px #0f172a" : undefined,
+            paintOrder: isDafeiyu ? "stroke fill" : undefined,
+            textShadow: isDafeiyu
+              ? "0 10px 0 #0f172a, 0 18px 34px rgba(0,0,0,0.45)"
+              : "6px 0 0 #fffdf8, -6px 0 0 #fffdf8, 0 6px 0 #fffdf8, 0 -6px 0 #fffdf8, 4px 4px 0 #fffdf8, -4px -4px 0 #fffdf8, 0 12px 24px rgba(0,0,0,0.16)",
           }}
         >
           {titleLine1}
         </div>
 
-        {/* Giant Line 2 with crimson sticker slab */}
+        {/* Giant Line 2 with high-contrast sticker slab */}
         <div
           style={{
             marginTop: 18,
@@ -144,8 +161,8 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
             style={{
               padding: is4x3 ? "10px 28px" : "12px 36px",
               borderRadius: 24,
-              backgroundColor: CRIMSON,
-              color: "#ffffff",
+              backgroundColor: slabBg,
+              color: isDafeiyu ? "#fde047" : "#ffffff",
               fontSize: h2Size,
               fontWeight: 900,
               lineHeight: 1.05,
@@ -162,9 +179,12 @@ export const BilibiliCover: React.FC<BilibiliCoverProps> = ({
               style={{
                 fontSize: h1Size * 0.92,
                 fontWeight: 900,
-                color: INK,
-                textShadow:
-                  "6px 0 0 #fffdf8, -6px 0 0 #fffdf8, 0 6px 0 #fffdf8, 0 -6px 0 #fffdf8, 0 10px 20px rgba(0,0,0,0.16)",
+                color: isDafeiyu ? "#ffffff" : INK,
+                WebkitTextStroke: isDafeiyu ? "6px #0f172a" : undefined,
+                paintOrder: isDafeiyu ? "stroke fill" : undefined,
+                textShadow: isDafeiyu
+                  ? "0 10px 0 #0f172a, 0 18px 30px rgba(0,0,0,0.45)"
+                  : "6px 0 0 #fffdf8, -6px 0 0 #fffdf8, 0 6px 0 #fffdf8, 0 -6px 0 #fffdf8, 0 10px 20px rgba(0,0,0,0.16)",
               }}
             >
               {titleSuffix}

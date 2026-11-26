@@ -7,35 +7,56 @@ export interface TopProgressBarProps {
   badgeText: string;
   title: string;
   titleBg?: string;
+  /** Optional subtle top-left series watermark */
+  watermark?: string;
 }
 
-/** Dafeiyu-style 9:16 segmented progress bar + NO.xx pill + bold outlined title */
+/** Dafeiyu-style 9:16 segmented progress bar + NO.xx pill + skewed bold outlined title (matching ref video 1) */
 export const TopProgressBar: React.FC<TopProgressBarProps> = ({
   totalSegments,
   currentSegment,
   badgeText,
   title,
-  titleBg = "linear-gradient(135deg, #2563eb 0%, #06b6d4 100%)",
+  titleBg = "linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)",
+  watermark,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const pop = spring({ frame, fps, config: { damping: 13, stiffness: 210 } });
+  const pop = spring({ frame, fps, config: { damping: 12, stiffness: 220 } });
 
   return (
     <div
       style={{
         position: "absolute",
-        top: 64,
-        left: 56,
-        right: 56,
+        top: 52,
+        left: 48,
+        right: 48,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: 20,
+        zIndex: 40,
       }}
     >
-      {/* Segmented progress indicator */}
-      <div style={{ display: "flex", gap: 8, width: "100%", justifyContent: "center" }}>
+      {watermark ? (
+        <div
+          style={{
+            alignSelf: "flex-start",
+            fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
+            fontSize: 28,
+            fontWeight: 900,
+            color: "rgba(255,255,255,0.82)",
+            letterSpacing: 1,
+            textShadow: "0 2px 10px rgba(0,0,0,0.45)",
+            marginBottom: -8,
+          }}
+        >
+          {watermark}
+        </div>
+      ) : null}
+
+      {/* Full-width segmented progress indicator */}
+      <div style={{ display: "flex", gap: 10, width: "100%", justifyContent: "center" }}>
         {Array.from({ length: totalSegments }, (_, i) => {
           const active = i + 1 === currentSegment;
           const passed = i + 1 < currentSegment;
@@ -43,61 +64,79 @@ export const TopProgressBar: React.FC<TopProgressBarProps> = ({
             <div
               key={i}
               style={{
-                flex: active ? 2 : 1,
-                maxWidth: active ? 68 : 34,
-                height: 8,
+                flex: 1,
+                height: 11,
                 borderRadius: 99,
                 backgroundColor: active
                   ? "#ffffff"
                   : passed
-                    ? "rgba(255,255,255,0.65)"
-                    : "rgba(255,255,255,0.24)",
+                    ? "rgba(255,255,255,0.88)"
+                    : "rgba(255,255,255,0.28)",
+                boxShadow: active ? "0 0 14px rgba(255,255,255,0.85)" : "none",
               }}
             />
           );
         })}
       </div>
 
-      {/* NO.xx pill */}
+      {/* NO.xx capsule (matching ref video 1 mint-cyan badge + dark pill) */}
       <div
         style={{
           display: "inline-flex",
           alignItems: "center",
-          gap: 12,
-          padding: "8px 22px",
+          gap: 14,
+          padding: "8px 26px 8px 12px",
           borderRadius: 999,
-          backgroundColor: "rgba(10, 14, 28, 0.72)",
-          border: "2px solid rgba(255,255,255,0.45)",
+          backgroundColor: "rgba(10, 18, 32, 0.78)",
+          border: "2.5px solid rgba(255,255,255,0.36)",
           color: "#ffffff",
           fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
-          fontSize: 26,
+          fontSize: 30,
           fontWeight: 800,
+          boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
         }}
       >
-        <span style={{ color: "#fde047" }}>
+        <span
+          style={{
+            padding: "4px 18px",
+            borderRadius: 999,
+            backgroundColor: "#a7f3d0",
+            color: "#0b1324",
+            fontWeight: 900,
+            fontSize: 28,
+          }}
+        >
           NO.{String(currentSegment).padStart(2, "0")}
         </span>
         <span>{badgeText}</span>
       </div>
 
-      {/* Bold outlined title card */}
+      {/* Skewed parallelogram bold outlined title banner */}
       <div
         style={{
-          transform: `scale(${interpolate(pop, [0, 1], [0.82, 1])})`,
-          padding: "14px 44px",
-          borderRadius: 24,
+          transform: `scale(${interpolate(pop, [0, 1], [0.8, 1])}) skewX(-6deg)`,
+          padding: "16px 56px",
+          borderRadius: 22,
           background: titleBg,
           border: "5px solid #ffffff",
-          boxShadow: "0 10px 28px rgba(0,0,0,0.35)",
-          color: "#ffffff",
-          fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
-          fontSize: 66,
-          fontWeight: 900,
-          letterSpacing: 2,
-          textShadow: "0 4px 0 rgba(0,0,0,0.35)",
+          boxShadow: "0 14px 32px rgba(0,0,0,0.42)",
         }}
       >
-        {title}
+        <div
+          style={{
+            transform: "skewX(6deg)",
+            color: "#ffffff",
+            fontFamily: "'Microsoft YaHei', 'PingFang SC', sans-serif",
+            fontSize: 82,
+            fontWeight: 900,
+            letterSpacing: 3,
+            WebkitTextStroke: "4px #0f172a",
+            paintOrder: "stroke fill",
+            textShadow: "0 6px 0 #0f172a",
+          }}
+        >
+          {title}
+        </div>
       </div>
     </div>
   );

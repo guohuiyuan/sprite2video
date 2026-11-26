@@ -1,0 +1,15 @@
+{
+  "name": "dafeiyu-chibi",
+  "updated_at": "2026-11-26T23:09:41",
+  "dna": "chibi, 1girl, cute moe anime illustration, soft cel shading, clean dark lineart, thin curved blue ahoge standing up above top of head, muted periwinkle blue wavy long hair, soft slate-indigo blue hair with light sky blue lower inner tips, parted wispy bangs with center lock between eyes, wide curved opaque white ruffled lace maid headdress hugging head, low droopy horizontal whale flipper ear fins sticking straight out to sides at eye level with dark blue top and white underside, small sky blue ribbon bow on side of headdress, large gentle glossy indigo-to-sky blue eyes, soft pink cheek blush, deep navy Victorian maid dress, white ruffled lace collar and straps, opaque white lace apron, navy bow tie with round pale blue gem at collar, upper body",
+  "bg": "white",
+  "mode": "grid_2x2",
+  "base_seed": 20261136,
+  "steps": 10,
+  "sampler": "euler",
+  "scheduler": "sgm_uniform",
+  "resolution": "square",
+  "negative_single": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, gradient background, border, frame, shadow on background, multiple girls, 2girls, cat ears, fox ears, wolf ears, dog ears, pointy animal ears on top of head, ears above head, blunt straight bangs, neon blue hair, cyan hair, black hair, closed loop hair",
+  "negative_grid": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, fused fingers, text, watermark, signature, logo, blurry, jpeg artifacts, complex background, scenery, overlapping panels, speech bubble, comic border lines, cat ears, fox ears, wolf ears, dog ears, pointy animal ears on top of head, ears above head, blunt straight bangs, neon blue hair, cyan hair, black hair, closed loop hair",
+  "notes": ""
+}

@@ -12,13 +12,15 @@
 
 ## 视觉与贴图效果预览
 
-### 1. 萌版角色贴图库一致性验收（参考图 vs 12 表情白边贴纸）
-![Evil Neuro Chibi Consistency Sheet](docs/assets/evil-neuro-consistency.png)
+### 1. 萌版角色贴图库一致性验收（参考图 vs 12 表情）
+| Evil_Neuro_CN（方格纸白边贴纸验收） | 蓝色大肥鱼（深底白蕾丝防透底验收） |
+| :---: | :---: |
+| ![Evil Neuro Chibi Consistency Sheet](docs/assets/evil-neuro-consistency.png) | ![Dafeiyu Chibi Consistency Sheet](docs/assets/dafeiyu-consistency.png) |
 
-### 2. 16:9 卡普迪姆风 + OneTake 光标点击动效 + B 站双规格封面
-| 16:9 复古方格纸 + 角色情绪反应 | OneTake 交互点击 + 动作绑定 SFX | 自动生成 B 站 16:9 封面 |
-| :---: | :---: | :---: |
-| ![Capdim Frame](docs/assets/demo-frame-capdim.jpg) | ![Cursor Click Frame](docs/assets/demo-frame-cursor.png) | ![Bilibili Cover](docs/assets/demo-cover-16x9.png) |
+### 2. 双标杆版式（16:9 卡普迪姆风 & 9:16 大肥鱼风）+ 自动 B 站封面
+| 16:9 卡普迪姆风 + 角色反应 | 16:9 OneTake 光标点击 + 动作 SFX | 9:16 大肥鱼风竖屏科普 | 自动生成双主题 B 站封面 |
+| :---: | :---: | :---: | :---: |
+| ![Capdim Frame](docs/assets/demo-frame-capdim.jpg) | ![Cursor Click Frame](docs/assets/demo-frame-cursor.png) | ![Dafeiyu 9:16 Frame](docs/assets/demo-frame-dafeiyu-9x16.jpg) | ![Dafeiyu Bilibili Cover](docs/assets/demo-cover-dafeiyu-16x9.png) |
 
 ---
 
@@ -67,14 +69,15 @@ sprite2video/
 ├── public/
 │   ├── characters/
 │   │   ├── demo-chibi/                 # 开箱示例 Q 版贴图库
-│   │   └── evil-neuro-chibi/           # 萌版 Evil_Neuro_CN 12 表情贴图库（含 reference/raw/trace/consistency）
+│   │   ├── evil-neuro-chibi/           # 萌版 Evil_Neuro_CN 12 表情贴图库（含 reference/raw/trace/consistency）
+│   │   └── dafeiyu-chibi/              # 萌版蓝色大肥鱼 12 表情贴图库（含 reference/raw/trace/consistency）
 │   └── sfx/                            # 10 个免版权数学合成 WAV 短音效
 └── src/
-    ├── Root.tsx                        # 注册视频组合与 B 站双规格封面 <Still>
+    ├── Root.tsx                        # 注册双版式视频组合与 B 站双规格封面 <Still>
     ├── lib/onetakeMotion.ts            # OneTake 风格连续动效数学库
     ├── components/                     # CharacterSprite / OneTakePrimitives / SfxTrack / BilibiliCover / DynamicBackground / TopProgressBar / MotionWidgets
     ├── demos/                          # VerticalDafeiyuDemo & HorizontalCapdimDemo 开箱示例
-    └── videos/                         # 完整实战案例（WellSpokenEvilNeuro）
+    └── videos/                         # 双版式完整代码案例（WellSpokenEvilNeuro 16:9 & WeReadDafeiyu 9:16）
 ```
 
 ---
