@@ -57,6 +57,13 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={WEREAD_COVER_PROPS}
       />
+      <Still
+        id="WeReadCover3x4"
+        component={BilibiliCover}
+        width={1080}
+        height={1440}
+        defaultProps={WEREAD_COVER_PROPS}
+      />
       <Composition
         id="WellSpokenEvilNeuro"
         component={WellSpokenEvilNeuro}
@@ -77,6 +84,13 @@ export const RemotionRoot: React.FC = () => {
         component={BilibiliCover}
         width={1440}
         height={1080}
+        defaultProps={WELL_SPOKEN_COVER_PROPS}
+      />
+      <Still
+        id="WellSpokenCover3x4"
+        component={BilibiliCover}
+        width={1080}
+        height={1440}
         defaultProps={WELL_SPOKEN_COVER_PROPS}
       />
       <Composition

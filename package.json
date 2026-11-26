@@ -12,6 +12,7 @@
     "still:capdim": "remotion still src/index.ts HorizontalCapdimDemo out/capdim-frame.png --frame=45",
     "still:cover16x9": "remotion still src/index.ts WellSpokenCover16x9 out/cover-16x9.png",
     "still:cover4x3": "remotion still src/index.ts WellSpokenCover4x3 out/cover-4x3.png",
+    "still:cover3x4": "remotion still src/index.ts WellSpokenCover3x4 out/cover-3x4.png",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
